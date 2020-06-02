@@ -4,13 +4,12 @@ author: "William Hoyos Morales"
 date: "6/1/2020"
 output: 
         html_document:
-                keep_md: true
+                keep_md: TRUE
 ---
 
 
 
 ## Introduction
-
 It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the “quantified self” movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.
 
 This assignment makes use of data from a personal activity monitoring device. This device collects data at 5 minute intervals through out the day. The data consists of two months of data from an anonymous individual collected during the months of October and November, 2012 and include the number of steps taken in 5 minute intervals each day.
@@ -60,11 +59,15 @@ activity <- read_csv("activity.csv")
 ##   interval = col_double()
 ## )
 ```
+
 ### 2. Histogram of the total number of steps taken each day
 
 ```r
 activity_by_days <- aggregate(steps ~ date, data = activity, FUN = sum, na.action = na.omit)
+```
 
+
+```r
 #Histogram of total steps
 ggplot(data = activity_by_days, aes(steps)) +
         geom_histogram(fill = "blue", bins = 8) +
@@ -93,11 +96,14 @@ median(activity_by_days$steps)
 ## [1] 10765
 ```
 
-
 ### 4. Time series plot of the average number of steps taken
 
 ```r
 activity_by_time <- aggregate(steps ~ interval,data = activity, FUN = mean, na.rm = TRUE)
+```
+
+
+```r
 ggplot(data = activity_by_time, aes(x = interval, 
                                     y = steps)) +
         geom_line(color = "blue") +
@@ -175,7 +181,10 @@ activity2 <- activity %>%
 
 ```r
 activity_by_days_2 <- aggregate(steps ~ date, data = activity2, FUN = sum, na.action = na.omit)
+```
 
+
+```r
 #Histogram of total steps after missing values are imputed
 ggplot(data = activity_by_days_2, aes(steps)) +
         geom_histogram(fill = "blue", bins = 8) +
@@ -206,7 +215,6 @@ median(activity_by_days_2$steps)
 After imputing missing data, the values do not differ from the estimates from the first part of the assignment. The impact of imputing missing data on the estimates is minimal. There is no big difference between in two results.
 
 ### 8. Panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
-
 Create a new factor variable in the dataset with two levels (“weekday” and “weekend”)
 
 ```r
@@ -215,10 +223,14 @@ activity2 <- activity2 %>%
         mutate(type_of_day = ifelse(day == "Saturday" | day == "Sunday",
                                     "weekend", "weekday"))
 ```
-Create the plot
+
 
 ```r
 activity_by_time_2 <- aggregate(steps ~ interval + type_of_day, data = activity2, FUN = mean, na.rm = TRUE)
+```
+Create the plot
+
+```r
 ggplot(data = activity_by_time_2, aes(x = interval, 
                                     y = steps)) +
         geom_line(color = "blue") +
@@ -227,7 +239,6 @@ ggplot(data = activity_by_time_2, aes(x = interval,
 ```
 
 ![](../activity_monitoring/figures/plot4-1.png)<!-- -->
-
 
 
 

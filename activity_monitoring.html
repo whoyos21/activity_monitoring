@@ -401,9 +401,8 @@ summary {
 </div>
 <div id="histogram-of-the-total-number-of-steps-taken-each-day" class="section level3">
 <h3>2. Histogram of the total number of steps taken each day</h3>
-<pre class="r"><code>activity_by_days &lt;- aggregate(steps ~ date, data = activity, FUN = sum, na.action = na.omit)
-
-#Histogram of total steps
+<pre class="r"><code>activity_by_days &lt;- aggregate(steps ~ date, data = activity, FUN = sum, na.action = na.omit)</code></pre>
+<pre class="r"><code>#Histogram of total steps
 ggplot(data = activity_by_days, aes(steps)) +
         geom_histogram(fill = &quot;blue&quot;, bins = 8) +
         theme_light()</code></pre>
@@ -420,8 +419,8 @@ median(activity_by_days$steps)</code></pre>
 </div>
 <div id="time-series-plot-of-the-average-number-of-steps-taken" class="section level3">
 <h3>4. Time series plot of the average number of steps taken</h3>
-<pre class="r"><code>activity_by_time &lt;- aggregate(steps ~ interval,data = activity, FUN = mean, na.rm = TRUE)
-ggplot(data = activity_by_time, aes(x = interval, 
+<pre class="r"><code>activity_by_time &lt;- aggregate(steps ~ interval,data = activity, FUN = mean, na.rm = TRUE)</code></pre>
+<pre class="r"><code>ggplot(data = activity_by_time, aes(x = interval, 
                                     y = steps)) +
         geom_line(color = &quot;blue&quot;) +
         theme_light()</code></pre>
@@ -473,9 +472,8 @@ filled_activity</code></pre>
 </div>
 <div id="histogram-of-the-total-number-of-steps-taken-each-day-after-missing-values-are-imputed" class="section level3">
 <h3>7. Histogram of the total number of steps taken each day after missing values are imputed</h3>
-<pre class="r"><code>activity_by_days_2 &lt;- aggregate(steps ~ date, data = activity2, FUN = sum, na.action = na.omit)
-
-#Histogram of total steps after missing values are imputed
+<pre class="r"><code>activity_by_days_2 &lt;- aggregate(steps ~ date, data = activity2, FUN = sum, na.action = na.omit)</code></pre>
+<pre class="r"><code>#Histogram of total steps after missing values are imputed
 ggplot(data = activity_by_days_2, aes(steps)) +
         geom_histogram(fill = &quot;blue&quot;, bins = 8) +
         theme_light()</code></pre>
@@ -495,9 +493,9 @@ median(activity_by_days_2$steps)</code></pre>
         mutate(day = weekdays(as.Date(date))) %&gt;% 
         mutate(type_of_day = ifelse(day == &quot;Saturday&quot; | day == &quot;Sunday&quot;,
                                     &quot;weekend&quot;, &quot;weekday&quot;))</code></pre>
+<pre class="r"><code>activity_by_time_2 &lt;- aggregate(steps ~ interval + type_of_day, data = activity2, FUN = mean, na.rm = TRUE)</code></pre>
 <p>Create the plot</p>
-<pre class="r"><code>activity_by_time_2 &lt;- aggregate(steps ~ interval + type_of_day, data = activity2, FUN = mean, na.rm = TRUE)
-ggplot(data = activity_by_time_2, aes(x = interval, 
+<pre class="r"><code>ggplot(data = activity_by_time_2, aes(x = interval, 
                                     y = steps)) +
         geom_line(color = &quot;blue&quot;) +
         theme_light() +
